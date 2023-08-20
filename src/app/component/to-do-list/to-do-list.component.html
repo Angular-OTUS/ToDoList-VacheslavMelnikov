@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Заготовка Angular проекта для приложения ToDo List</h1>
+
+  <ul class="list-group-wrapper">
+    <li *ngFor="let toDo of toDoList" class="list-group-item">
+      <span [class.to-do-del]="toDo.state === stay.COMPLETED">{{toDo.toDo}}</span><button type="button" class="btn btn-danger">Удалить</button></li>
+  </ul>
+
+  <br>
+
+  <div class="add-items">
+    <input type="text" class="form-control todo-list-input" placeholder="Добавьте новую задачу...">
+    <button class="add btn btn-primary font-weight-bold todo-list-add-btn">Добавить</button>
+  </div>
+</div>
+
+
+
+

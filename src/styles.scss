@@ -1,0 +1,21 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/bootstrap.scss";
+
+h1 {
+  font-size: 32px;
+  line-height: 150%;
+  color: #333333;
+  margin-bottom: 24px;
+  @include media-breakpoint-down(lg) {
+    font-size: 24px;
+  }
+  @include media-breakpoint-down(md) {
+    font-size: 20px;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: 18px;
+  }
+}
+
