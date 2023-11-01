@@ -1,0 +1,37 @@
+
+.list-group-wrapper {
+  display: grid;
+  gap: 4px;
+  padding: 0;
+  span {
+    border: 1px #dfdcdc solid;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin-right: 4px;
+  }
+  li {
+    display: grid;
+    grid-template-columns: 1fr 86px;
+    gap: 8px;
+  }
+  button {
+    height: fit-content;
+  }
+}
+
+.add-items {
+  display: grid;
+  grid-template-columns: 1fr 108px;
+  gap: 8px
+}
+
+.todo-list-input::placeholder {
+  color: #b2b0b0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.to-do-del {
+  color: #b2b0b0;
+  text-decoration-line: line-through;
+}
