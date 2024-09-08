@@ -9,10 +9,17 @@
         <p>{{toDo.toDoText}}</p>
       </mat-card-content>
       <mat-card-footer class="card-footer">
-        <button mat-raised-button>
+
+        <ng-container *ngIf="toDo.process; else disabled"><button
+          mat-raised-button>
           <mat-icon>delete</mat-icon>
-          {{ toDo.process? 'В работе' : 'Завершено' }}
-        </button>
+          {{'Завершить'}}
+        </button></ng-container>
+        <ng-template #disabled>
+          <button mat-raised-button disabled>
+            {{ 'Завершено' }}
+          </button>
+        </ng-template>
       </mat-card-footer>
     </mat-card>
   </li>
