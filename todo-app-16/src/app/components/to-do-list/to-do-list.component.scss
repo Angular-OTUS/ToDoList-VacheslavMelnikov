@@ -10,16 +10,6 @@ ul {
   gap: 8px;
 }
 
-.card {
-  padding: 8px;
-}
-
-.card-footer {
-  display: flex;
-  justify-content: end;
-  padding: 8px;
-}
-
 .todo-form {
   min-width: 150px;
   max-width: 100%;
@@ -38,9 +28,25 @@ ul {
   justify-content: center;
   align-items: center;
   gap: 4px;
-  background-color: rgba(13, 241, 222, 0.51);
+  background-color: green;
+  color: white;
   width: 220px;
   height: 40px;
   border-radius: 8px;
+  border: none;
   cursor: pointer;
+
+  &:hover {
+    background-color: darkgreen;
+  }
+}
+
+.submit-disable {
+  background-color: darkgrey;
+  cursor: auto;
+  color: grey !important;
+
+  &:hover {
+    background-color: darkgrey;
+  }
 }

@@ -2,3 +2,15 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button {
+  color: white !important;
+}
+
+.button-delete {
+  background-color: red !important;
+
+  &:hover {
+    background-color: darkred !important;
+  }
+}
