@@ -8,9 +8,9 @@ import {TodoElement} from '../to-do-list/to-do-list.component';
 })
 export class ToDoListItemComponent {
   @Input() toDo: TodoElement | undefined;
-  @Output() idSent = new EventEmitter<number>();
+  @Output() idSent:EventEmitter<number> = new EventEmitter<number>();
 
-  sendId() {
+  public sendId(): void {
     this.idSent.emit(this.toDo?.id);
   }
 }
