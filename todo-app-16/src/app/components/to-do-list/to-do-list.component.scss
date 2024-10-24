@@ -27,7 +27,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   background-color: green;
   color: white;
   width: 220px;
@@ -39,12 +39,20 @@ ul {
   &:hover {
     background-color: darkgreen;
   }
+
+  img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(327deg) brightness(102%) contrast(102%);
+  }
 }
 
 .submit-disable {
   background-color: darkgrey;
   cursor: auto;
-  color: grey !important;
+  color: #808080 !important;
+
+  img {
+    filter: brightness(0) saturate(100%) invert(54%) sepia(0%) saturate(619%) hue-rotate(111deg) brightness(93%) contrast(91%);
+  }
 
   &:hover {
     background-color: darkgrey;
