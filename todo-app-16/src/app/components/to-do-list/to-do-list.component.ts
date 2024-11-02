@@ -12,7 +12,7 @@ export interface TodoElement {
   styleUrls: ['./to-do-list.component.scss']
 })
 export class ToDoListComponent {
-  toDoFromApi: TodoElement[] = [
+  public toDoFromApi: TodoElement[] = [
     {
       id: 1,
       title: "Todo Number 1",
@@ -33,25 +33,31 @@ export class ToDoListComponent {
       title: "Todo Number 4",
       toDoText: "Идейные соображения высшего порядка, а также реализация намеченных плановых заданий позволяет оценить значение систем массового участия. Равным образом новая модель организационной деятельности позволяет выполнять важные задания по разработке систем массового участия."
     }
-    ];
+  ];
 
-  @ViewChild('textAreaElement') textAreaElement!: ElementRef;
+  @ViewChild('textAreaElement') textAreaElement?: ElementRef;
 
-  removeElementWithId(id: number) {
+  public removeElementWithId(id: number): void {
     this.toDoFromApi = this.toDoFromApi.filter(todo => todo.id !== id);
   }
 
-  addNewElement() {
+  public buttonDisable(): boolean {
+    return this.textAreaElement?.nativeElement.value.length < 3;
+  }
+
+  public addNewElement(): void {
     const id = Math.max(...this.toDoFromApi.map(todo => todo.id)) + 1;
     const title = "Todo Number " + id;
-    const toDoText = this.textAreaElement.nativeElement.value;
+    const toDoText = this.textAreaElement?.nativeElement.value;
+
+    if (this.textAreaElement) {
+      this.textAreaElement.nativeElement.value = '';
+    }
 
     this.toDoFromApi.push({
       id,
       title,
       toDoText
     })
-
-    console.log('Input: ', this.toDoFromApi); //////
   }
 }
