@@ -1,4 +1,5 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Subscription, timer} from 'rxjs';
 
 export interface TodoElement {
   id: number;
@@ -11,7 +12,7 @@ export interface TodoElement {
   templateUrl: './to-do-list.component.html',
   styleUrls: ['./to-do-list.component.scss']
 })
-export class ToDoListComponent {
+export class ToDoListComponent implements OnInit, OnDestroy {
   public toDoFromApi: TodoElement[] = [
     {
       id: 1,
@@ -37,6 +38,9 @@ export class ToDoListComponent {
 
   @ViewChild('textAreaElement') textAreaElement?: ElementRef;
 
+  isLoading = true;
+  private loadingSubscription: any;
+
   public removeElementWithId(id: number): void {
     this.toDoFromApi = this.toDoFromApi.filter(todo => todo.id !== id);
   }
@@ -59,5 +63,17 @@ export class ToDoListComponent {
       title,
       toDoText
     })
+  }
+
+  ngOnInit() {
+    this.loadingSubscription = timer(500).subscribe(() => {
+      this.isLoading = false;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.loadingSubscription) {
+      this.loadingSubscription.unsubscribe();
+    }
   }
 }

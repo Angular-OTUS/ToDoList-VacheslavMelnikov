@@ -1,10 +1,23 @@
-<div class="container">
+
   <h1>Список задач</h1>
+
+
+  <ng-container *ngIf="isLoading; else toDoList">
+    <div class="loader">
+      <mat-progress-spinner
+        mode="indeterminate"
+        diameter="50">
+      </mat-progress-spinner>
+    </div>
+  </ng-container>
+<ng-template #toDoList>
   <ul>
     <li *ngFor="let toDo of toDoFromApi; let i = index">
       <app-to-do-list-item [toDo]="toDo" (idSent)="removeElementWithId($event)"></app-to-do-list-item>
     </li>
   </ul>
+</ng-template>
+
 
 
   <form class="todo-form">
@@ -21,7 +34,7 @@
       Создать задачу
     </button>
   </form>
-</div>
+
 
 
 
