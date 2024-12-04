@@ -6,10 +6,11 @@
     <p>{{toDo?.toDoText}}</p>
   </mat-card-content>
   <mat-card-footer class="card-footer">
-  <button (click)="sendId()"
-      mat-raised-button class="button-delete">
-      <mat-icon style="color: white">delete</mat-icon>
-      Удалить
-    </button>
+    <app-button-component (click)="sendId()" [title]="'Удалить'"></app-button-component>
+<!--  <button (click)="sendId()"-->
+<!--      mat-raised-button class="button-delete">-->
+<!--      <mat-icon style="color: white">delete</mat-icon>-->
+<!--      Удалить-->
+<!--    </button>-->
   </mat-card-footer>
 </mat-card>

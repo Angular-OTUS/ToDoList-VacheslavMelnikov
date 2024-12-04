@@ -15,6 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import { ToDoListItemComponent } from './components/to-do-list-item/to-do-list-item.component';
+import { SharedModuleModule } from './components/shared/shared-module.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ToDoListItemComponent } from './components/to-do-list-item/to-do-list-i
     MatChipsModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    SharedModuleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
