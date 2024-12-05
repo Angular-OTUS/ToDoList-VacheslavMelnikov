@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TodoElement} from '../to-do-list/to-do-list.component';
+import {ButtonType} from '../shared/button-component/button-component.component';
 
 @Component({
   selector: 'app-to-do-list-item',
@@ -7,6 +8,8 @@ import {TodoElement} from '../to-do-list/to-do-list.component';
   styleUrls: ['./to-do-list-item.component.scss']
 })
 export class ToDoListItemComponent {
+  buttonDelete = ButtonType.DELETE;
+
   @Input() toDo: TodoElement | undefined;
   @Output() idSent:EventEmitter<number> = new EventEmitter<number>();
 

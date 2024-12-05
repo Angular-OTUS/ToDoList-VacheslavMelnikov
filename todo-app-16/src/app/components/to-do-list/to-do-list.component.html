@@ -1,10 +1,23 @@
-<div class="container">
+
   <h1>Список задач</h1>
+
+
+  <ng-container *ngIf="isLoading; else toDoList">
+    <div class="loader">
+      <mat-progress-spinner
+        mode="indeterminate"
+        diameter="50">
+      </mat-progress-spinner>
+    </div>
+  </ng-container>
+<ng-template #toDoList>
   <ul>
     <li *ngFor="let toDo of toDoFromApi; let i = index">
       <app-to-do-list-item [toDo]="toDo" (idSent)="removeElementWithId($event)"></app-to-do-list-item>
     </li>
   </ul>
+</ng-template>
+
 
 
   <form class="todo-form">
@@ -12,16 +25,9 @@
       <mat-label>Содержание задачи</mat-label>
       <textarea #textAreaElement matInput placeholder="Что конкретно в планах..."></textarea>
     </mat-form-field>
-
-    <button (click)="addNewElement()"
-            [disabled]="buttonDisable()"
-            class="submit-button-container"
-            [class.submit-disable]="buttonDisable()">
-      <img src="assets/images/addNewElement.svg" alt="">
-      Создать задачу
-    </button>
+    <app-button-component (click)="addNewElement()" [type]="buttonSubmit" [disabled]="buttonDisable()" [image]="'assets/images/addNewElement.svg'" [title]="'Создать задачу'"></app-button-component>
   </form>
-</div>
+
 
 
 
