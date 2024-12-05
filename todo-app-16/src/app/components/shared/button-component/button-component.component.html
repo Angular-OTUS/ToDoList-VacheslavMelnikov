@@ -1,4 +1,4 @@
-<button mat-raised-button class="button-delete">
-  <mat-icon style="color: white">delete</mat-icon>
+<button mat-raised-button [disabled]="disabled" [ngClass]="type">
+  <img [src]="image" alt="">
   {{title}}
 </button>

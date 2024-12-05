@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription, timer} from 'rxjs';
+import {ButtonType} from '../shared/button-component/button-component.component';
 
 export interface TodoElement {
   id: number;
@@ -40,6 +41,8 @@ export class ToDoListComponent implements OnInit, OnDestroy {
 
   isLoading = true;
   private loadingSubscription: any;
+
+  buttonSubmit = ButtonType.SUBMIT;
 
   public removeElementWithId(id: number): void {
     this.toDoFromApi = this.toDoFromApi.filter(todo => todo.id !== id);

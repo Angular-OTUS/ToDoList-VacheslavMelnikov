@@ -25,14 +25,7 @@
       <mat-label>Содержание задачи</mat-label>
       <textarea #textAreaElement matInput placeholder="Что конкретно в планах..."></textarea>
     </mat-form-field>
-
-    <button (click)="addNewElement()"
-            [disabled]="buttonDisable()"
-            class="submit-button-container"
-            [class.submit-disable]="buttonDisable()">
-      <img src="assets/images/addNewElement.svg" alt="">
-      Создать задачу
-    </button>
+    <app-button-component (click)="addNewElement()" [type]="buttonSubmit" [disabled]="buttonDisable()" [image]="'assets/images/addNewElement.svg'" [title]="'Создать задачу'"></app-button-component>
   </form>
 
 

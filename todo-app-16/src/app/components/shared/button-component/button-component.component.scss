@@ -2,16 +2,54 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 8px;
+  cursor: pointer;
+
+  img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(327deg) brightness(102%) contrast(102%);
+  }
 }
 
-.button-delete {
+.btn-delete {
   background-color: red !important;
 
-  &:hover {
-    background-color: darkred !important;
+  @media (pointer: fine) {
+    &:hover {
+      background-color: darkred !important;
+    }
+  }
+}
+
+.btn-submit {
+  background-color: green;
+  width: 172px;
+  height: 40px;
+
+  @media (pointer: fine) {
+    &:hover {
+      background-color: darkgreen;
+    }
+  }
+
+  &[disabled] {
+    background-color: darkgrey;
+    cursor: auto;
+    color: #808080 !important;
+
+    img {
+      filter: brightness(0) saturate(100%) invert(54%) sepia(0%) saturate(619%) hue-rotate(111deg) brightness(93%) contrast(91%);
+    }
+
+    @media (pointer: fine) {
+      &:hover {
+        background-color: darkgrey;
+      }
+    }
   }
 }
