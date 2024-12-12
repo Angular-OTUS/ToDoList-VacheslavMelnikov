@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {asNativeElements, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription, timer} from 'rxjs';
 import {ButtonType} from '../shared/button-component/button-component.component';
 
@@ -6,6 +6,7 @@ export interface TodoElement {
   id: number;
   title: string;
   toDoText: string;
+  description?: string;
 }
 
 @Component({
@@ -18,17 +19,20 @@ export class ToDoListComponent implements OnInit, OnDestroy {
     {
       id: 1,
       title: "Todo Number 1",
-      toDoText: "Задача организации, в особенности же укрепление и развитие структуры влечет за собой процесс внедрения и модернизации форм развития. Задача организации, в особенности же реализация намеченных плановых заданий представляет собой интересный эксперимент проверки систем массового участия."
+      toDoText: "Задача организации, в особенности же укрепление и развитие структуры влечет за собой процесс внедрения и модернизации форм развития. Задача организации, в особенности же реализация намеченных плановых заданий представляет собой интересный эксперимент проверки систем массового участия.",
+      description: "Описание к Todo Number 1. В описании укрепление и развитие структуры и особенности реализации намеченных плановых заданий"
     },
     {
       id: 2,
       title: "Todo Number 2",
-      toDoText: "Значимость этих проблем настолько очевидна, что рамки и место обучения кадров способствует подготовки и реализации соответствующий условий активизации. Задача организации, в особенности же дальнейшее развитие различных форм деятельности играет важную роль в формировании дальнейших направлений развития."
+      toDoText: "Значимость этих проблем настолько очевидна, что рамки и место обучения кадров способствует подготовки и реализации соответствующий условий активизации. Задача организации, в особенности же дальнейшее развитие различных форм деятельности играет важную роль в формировании дальнейших направлений развития.",
+      description: "Описание к Todo Number 2"
     },
     {
       id: 3,
       title: "Todo Number 3",
-      toDoText: "Яавным образом постоянное информационно-пропагандистское обеспечение нашей деятельности требуют определения и уточнения позиций, занимаемых участниками в отношении поставленных задач. Идейные соображения высшего порядка, а также новая модель организационной деятельности требуют от нас анализа новых предложений."
+      toDoText: "Яавным образом постоянное информационно-пропагандистское обеспечение нашей деятельности требуют определения и уточнения позиций, занимаемых участниками в отношении поставленных задач. Идейные соображения высшего порядка, а также новая модель организационной деятельности требуют от нас анализа новых предложений.",
+      description: "Описание к Todo Number 3"
     },
     {
       id: 4,
@@ -38,9 +42,10 @@ export class ToDoListComponent implements OnInit, OnDestroy {
   ];
 
   @ViewChild('textAreaElement') textAreaElement?: ElementRef;
+  @ViewChild('textAreaElementDescription') textAreaElementDescription?: ElementRef;
 
   isLoading = true;
-  private loadingSubscription: any;
+  private loadingSubscription: Subscription = new Subscription();
 
   buttonSubmit = ButtonType.SUBMIT;
 
@@ -56,15 +61,21 @@ export class ToDoListComponent implements OnInit, OnDestroy {
     const id = Math.max(...this.toDoFromApi.map(todo => todo.id)) + 1;
     const title = "Todo Number " + id;
     const toDoText = this.textAreaElement?.nativeElement.value;
+    const description = this.textAreaElementDescription?.nativeElement.value;
 
     if (this.textAreaElement) {
       this.textAreaElement.nativeElement.value = '';
     }
 
+    if (this.textAreaElementDescription) {
+      this.textAreaElementDescription.nativeElement.value = '';
+    }
+
     this.toDoFromApi.push({
       id,
       title,
-      toDoText
+      toDoText,
+      description
     })
   }
 

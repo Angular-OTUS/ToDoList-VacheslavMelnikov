@@ -21,6 +21,13 @@ ul {
   gap: 16px;
 }
 
+.input-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
 .todo-full-width {
   width: 100%;
 }

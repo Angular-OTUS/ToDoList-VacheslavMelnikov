@@ -21,11 +21,27 @@
 
 
   <form class="todo-form">
-    <mat-form-field class="todo-full-width">
-      <mat-label>Содержание задачи</mat-label>
-      <textarea #textAreaElement matInput placeholder="Что конкретно в планах..."></textarea>
-    </mat-form-field>
-    <app-button-component (click)="addNewElement()" [type]="buttonSubmit" [disabled]="buttonDisable()" [image]="'assets/images/addNewElement.svg'" [title]="'Создать задачу'"></app-button-component>
+    <div class="input-block">
+      <mat-form-field class="todo-full-width">
+        <mat-label>Содержание задачи</mat-label>
+        <textarea #textAreaElement matInput placeholder="Что конкретно в планах..."></textarea>
+      </mat-form-field>
+      <mat-form-field class="todo-full-width">
+        <mat-label>Описание задачи</mat-label>
+        <textarea #textAreaElementDescription matInput placeholder="Описание задачи..."></textarea>
+      </mat-form-field>
+    </div>
+    <app-button-component
+      (click)="addNewElement()"
+      [type]="buttonSubmit"
+      [disabled]="buttonDisable()"
+      [image]="'assets/images/addNewElement.svg'"
+      [title]="'Создать задачу'"
+      appTooltip="Создать задачу"
+      [colorBackground]="'rgb(95,152,5)'"
+      [offsetY]="-40"
+      [shiftToMiddle]="true"
+      [showTooltip]="!buttonDisable()"></app-button-component>
   </form>
 
 

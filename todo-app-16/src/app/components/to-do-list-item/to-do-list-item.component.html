@@ -1,4 +1,9 @@
-<mat-card class="card" appearance="outlined">
+<mat-card class="card" appearance="outlined"
+          (click)="toggleDescription()"
+          appTooltip="Клик для отображения описания"
+          [offsetY]="5"
+          [shiftToMiddle]="true"
+          [showTooltip]="toDo?.description?.length">
   <mat-card-header>
     <mat-card-title>{{toDo?.title}}</mat-card-title>
   </mat-card-header>
@@ -6,6 +11,18 @@
     <p>{{toDo?.toDoText}}</p>
   </mat-card-content>
   <mat-card-footer class="card-footer">
-    <app-button-component (click)="sendId()" [type]="buttonDelete" [image]="'assets/images/delete.svg'" [title]="'Удалить'"></app-button-component>
+    <ng-container *ngIf="toDo?.description && displayDescription">
+      <div class="description-in-footer">
+        <p>{{toDo?.description}}</p>
+      </div>
+    </ng-container>
+    <app-button-component (click)="sendId($event)"
+                          [type]="buttonDelete"
+                          [image]="'assets/images/delete.svg'"
+                          [title]="'Удалить'"
+                          appTooltip="Удаление нельзя отменить!"
+                          [colorBackground]="'rgba(241,13,13,0.84)'"
+                          [offsetY]="-40">
+    </app-button-component>
   </mat-card-footer>
 </mat-card>

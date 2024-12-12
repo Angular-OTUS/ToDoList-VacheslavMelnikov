@@ -9,11 +9,17 @@ import {ButtonType} from '../shared/button-component/button-component.component'
 })
 export class ToDoListItemComponent {
   buttonDelete = ButtonType.DELETE;
+  public displayDescription = false;
 
   @Input() toDo: TodoElement | undefined;
   @Output() idSent:EventEmitter<number> = new EventEmitter<number>();
 
-  public sendId(): void {
+  public toggleDescription() {
+    this.displayDescription = !this.displayDescription;
+  }
+
+  public sendId(event: Event): void {
+    event.stopPropagation();
     this.idSent.emit(this.toDo?.id);
   }
 }
