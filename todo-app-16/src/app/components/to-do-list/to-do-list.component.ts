@@ -1,56 +1,39 @@
-import {asNativeElements, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Subscription, timer} from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {ButtonType} from '../shared/button-component/button-component.component';
-
-export interface TodoElement {
-  id: number;
-  title: string;
-  toDoText: string;
-  description?: string;
-}
+import {TodoElement, ToDoListService} from '../shared/to-do-list.service';
+import {LoadingIndicator} from '../shared/loading-indicator';
+import {NotificationService} from '../shared/notification.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-to-do-list',
   templateUrl: './to-do-list.component.html',
-  styleUrls: ['./to-do-list.component.scss']
+  styleUrls: ['./to-do-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToDoListComponent implements OnInit, OnDestroy {
-  public toDoFromApi: TodoElement[] = [
-    {
-      id: 1,
-      title: "Todo Number 1",
-      toDoText: "Задача организации, в особенности же укрепление и развитие структуры влечет за собой процесс внедрения и модернизации форм развития. Задача организации, в особенности же реализация намеченных плановых заданий представляет собой интересный эксперимент проверки систем массового участия.",
-      description: "Описание к Todo Number 1. В описании укрепление и развитие структуры и особенности реализации намеченных плановых заданий"
-    },
-    {
-      id: 2,
-      title: "Todo Number 2",
-      toDoText: "Значимость этих проблем настолько очевидна, что рамки и место обучения кадров способствует подготовки и реализации соответствующий условий активизации. Задача организации, в особенности же дальнейшее развитие различных форм деятельности играет важную роль в формировании дальнейших направлений развития.",
-      description: "Описание к Todo Number 2"
-    },
-    {
-      id: 3,
-      title: "Todo Number 3",
-      toDoText: "Яавным образом постоянное информационно-пропагандистское обеспечение нашей деятельности требуют определения и уточнения позиций, занимаемых участниками в отношении поставленных задач. Идейные соображения высшего порядка, а также новая модель организационной деятельности требуют от нас анализа новых предложений.",
-      description: "Описание к Todo Number 3"
-    },
-    {
-      id: 4,
-      title: "Todo Number 4",
-      toDoText: "Идейные соображения высшего порядка, а также реализация намеченных плановых заданий позволяет оценить значение систем массового участия. Равным образом новая модель организационной деятельности позволяет выполнять важные задания по разработке систем массового участия."
-    }
-  ];
 
   @ViewChild('textAreaElement') textAreaElement?: ElementRef;
   @ViewChild('textAreaElementDescription') textAreaElementDescription?: ElementRef;
 
-  isLoading = true;
-  private loadingSubscription: Subscription = new Subscription();
+  private subscription: Subscription = new Subscription();
+  public toDoList: TodoElement[] = [];
+  readonly loadingIndicatorList = new LoadingIndicator;
+  buttonSubmit = ButtonType;
 
-  buttonSubmit = ButtonType.SUBMIT;
-
-  public removeElementWithId(id: number): void {
-    this.toDoFromApi = this.toDoFromApi.filter(todo => todo.id !== id);
+  constructor(
+    private toDoListService: ToDoListService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private notificationService: NotificationService) {
+    this.loadingIndicatorList.isLoading = true;
   }
 
   public buttonDisable(): boolean {
@@ -58,8 +41,7 @@ export class ToDoListComponent implements OnInit, OnDestroy {
   }
 
   public addNewElement(): void {
-    const id = Math.max(...this.toDoFromApi.map(todo => todo.id)) + 1;
-    const title = "Todo Number " + id;
+    const title = "Todo Number ";
     const toDoText = this.textAreaElement?.nativeElement.value;
     const description = this.textAreaElementDescription?.nativeElement.value;
 
@@ -70,24 +52,21 @@ export class ToDoListComponent implements OnInit, OnDestroy {
     if (this.textAreaElementDescription) {
       this.textAreaElementDescription.nativeElement.value = '';
     }
-
-    this.toDoFromApi.push({
-      id,
-      title,
-      toDoText,
-      description
-    })
+    const addNewElementSubscription = this.toDoListService.addNewElement({title, toDoText, description}).subscribe(() => {
+      this.notificationService.showMessage('Задача добавлена');
+    });
+    this.subscription.add(addNewElementSubscription);
   }
 
   ngOnInit() {
-    this.loadingSubscription = timer(500).subscribe(() => {
-      this.isLoading = false;
-    });
+    const toDoListSubscription = this.toDoListService.toDoList$.subscribe(value => {
+      this.toDoList = value;
+      this.changeDetectorRef.detectChanges();
+      });
+    this.subscription.add(toDoListSubscription);
   }
 
   ngOnDestroy() {
-    if (this.loadingSubscription) {
-      this.loadingSubscription.unsubscribe();
-    }
+    this.subscription.unsubscribe();
   }
 }

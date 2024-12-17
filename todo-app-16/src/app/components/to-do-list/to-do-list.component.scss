@@ -1,3 +1,18 @@
+
+.todo-list-container {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+}
+
+.left-col {
+
+}
+
+.right-col {
+  border: 2px solid #969696;
+  border-radius: 4px;
+}
+
 .loader {
   display: flex;
   justify-content: center;

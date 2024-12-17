@@ -3,26 +3,69 @@
           appTooltip="Клик для отображения описания"
           [offsetY]="5"
           [shiftToMiddle]="true"
-          [showTooltip]="toDo?.description?.length">
-  <mat-card-header>
-    <mat-card-title>{{toDo?.title}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <p>{{toDo?.toDoText}}</p>
-  </mat-card-content>
-  <mat-card-footer class="card-footer">
-    <ng-container *ngIf="toDo?.description && displayDescription">
-      <div class="description-in-footer">
-        <p>{{toDo?.description}}</p>
+          [showTooltip]="toDo.description.length > 0">
+  <ng-container *ngIf="!loadingIndicatorItem.isLoading; else loadItem">
+    <mat-card-header>
+      <div class="title-edit-block">
+        <mat-card-title>
+          <ng-container *ngIf="!loadingIndicatorTitle.isLoading; else loadTitle">
+            <div #titleBlock contenteditable="true" (input)="updateText()" (focus)="titleEdit = true">{{toDo.title}}</div>
+          </ng-container>
+          <ng-template #loadTitle>
+            <div class="loader">
+              <mat-progress-spinner
+                mode="indeterminate"
+                diameter="30">
+              </mat-progress-spinner>
+            </div>
+          </ng-template>
+        </mat-card-title>
+        <ng-container *ngIf="titleEdit && inputText && inputText !== toDo.title">
+          <div class="title-edit-buttons">
+            <app-button-component (click)="titlePush($event)"
+                                  [type]="buttonSubmit.SUBMIT"
+                                  [image]="'assets/images/start.svg'"
+                                  [title]="'Сохранить'">
+            </app-button-component>
+            <app-button-component (click)="titleReset($event)"
+                                  [type]="buttonSubmit.DELETE"
+                                  [image]="'assets/images/reset.svg'"
+                                  [title]="'Отмена'"
+                                  appTooltip="Вернуть исходное"
+                                  [colorBackground]="'rgba(241,13,13,0.84)'"
+                                  [offsetY]="-40"
+                                  [shiftToMiddle]="true">
+            </app-button-component>
+          </div>
+
+        </ng-container>
       </div>
-    </ng-container>
-    <app-button-component (click)="sendId($event)"
-                          [type]="buttonDelete"
-                          [image]="'assets/images/delete.svg'"
-                          [title]="'Удалить'"
-                          appTooltip="Удаление нельзя отменить!"
-                          [colorBackground]="'rgba(241,13,13,0.84)'"
-                          [offsetY]="-40">
-    </app-button-component>
-  </mat-card-footer>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{toDo.toDoText}}</p>
+    </mat-card-content>
+    <mat-card-footer class="card-footer">
+      <ng-container *ngIf="toDo.description.length > 0 && displayDescription && !titleEdit">
+        <div class="description-in-footer">
+          <p>{{toDo.description}}</p>
+        </div>
+      </ng-container>
+      <app-button-component (click)="removeElement($event)"
+                            [type]="buttonSubmit.DELETE"
+                            [image]="'assets/images/delete.svg'"
+                            [title]="'Удалить'"
+                            appTooltip="Удаление нельзя отменить!"
+                            [colorBackground]="'rgba(241,13,13,0.84)'"
+                            [offsetY]="-40">
+      </app-button-component>
+    </mat-card-footer>
+  </ng-container>
+<ng-template #loadItem>
+  <div class="loader">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="80">
+    </mat-progress-spinner>
+  </div>
+</ng-template>
 </mat-card>

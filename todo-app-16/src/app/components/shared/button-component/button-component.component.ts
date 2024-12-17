@@ -1,12 +1,11 @@
 import {Component, Input} from '@angular/core';
-import {TodoElement} from '../../to-do-list/to-do-list.component';
 
 export enum ButtonType
 {
   DELETE = 'btn-delete',
   SUBMIT = 'btn-submit',
   DISABLE = 'btn-disable',
-};
+}
 
 @Component({
   selector: 'app-button-component',
