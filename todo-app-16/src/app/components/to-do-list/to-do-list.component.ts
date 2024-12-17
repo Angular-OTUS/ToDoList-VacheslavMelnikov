@@ -1,5 +1,4 @@
 import {
-  asNativeElements,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,

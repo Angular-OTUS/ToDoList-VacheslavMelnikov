@@ -5,7 +5,7 @@ export enum ButtonType
   DELETE = 'btn-delete',
   SUBMIT = 'btn-submit',
   DISABLE = 'btn-disable',
-};
+}
 
 @Component({
   selector: 'app-button-component',

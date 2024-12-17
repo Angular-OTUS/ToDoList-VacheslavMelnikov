@@ -1,6 +1,6 @@
-import {Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {ButtonType} from '../shared/button-component/button-component.component';
-import {LoaderObj, TodoElement, ToDoListService} from '../shared/to-do-list.service';
+import {TodoElement, ToDoListService} from '../shared/to-do-list.service';
 import {LoadingIndicator} from '../shared/loading-indicator';
 import {Subscription} from 'rxjs';
 import {NotificationService} from '../shared/notification.service';
