@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {TodoElement} from '../../to-do-list/to-do-list.component';
 
 export enum ButtonType
 {

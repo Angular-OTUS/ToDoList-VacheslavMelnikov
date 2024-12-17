@@ -18,3 +18,21 @@
   width: 100%;
   color: darkgrey;
 }
+
+.title-edit-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title-edit-buttons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}

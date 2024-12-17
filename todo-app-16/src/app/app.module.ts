@@ -16,6 +16,7 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import { ToDoListItemComponent } from './components/to-do-list-item/to-do-list-item.component';
 import { SharedModuleModule } from './components/shared/shared-module.module';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SharedModuleModule } from './components/shared/shared-module.module';
     MatCardModule,
     MatChipsModule,
     FormsModule,
+    MatSnackBarModule,
     MatFormFieldModule,
     MatInputModule,
     SharedModuleModule
